@@ -23,24 +23,28 @@ function Todos({ todos, fetchTodosActions, createTodoAction }) {
   };
 
   return (
-    <div className="app">
+    <div className="container-sm">
+      <h4>Todo App</h4>
       <form onSubmit={handleTodoSubmit}>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Enter todo"
-          value={newTodo}
-          onChange={handleTodoChange}
-        />
-        <button className="btn btn-primary px-5 my-2" type="submit">
-          Submit
-        </button>
+        <div className="form-group row">
+          <input
+            className="form-control col-sm-10"
+            type="text"
+            placeholder="Enter todo"
+            value={newTodo}
+            onChange={handleTodoChange}
+          />
+          <button className="btn btn-primary col-sm-2" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
-      <ul>
+
+      <div className="card">
         {todos.map((todo) => (
           <Todo todo={todo} key={todo.id} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

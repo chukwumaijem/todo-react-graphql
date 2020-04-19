@@ -16,23 +16,29 @@ function Todo({ todo, deleteTodoAction, updateTodoAction }) {
   };
 
   return (
-    <li key={id} className="w-100">
-      <span className={completed ? 'done' : 'pending'}>{text}</span>
+    <div
+      className={`
+      row
+      card-body
+        list-group-item-${completed ? 'success' : 'info'}
+        `}
+    >
+      <span className="col-sm-8">{text}</span>
       <button
-        className="btn btn-sm btn-danger rounded-circle float-right"
-        onClick={handleTodoDelete}
-      >
-        X
-      </button>
-      <button
-        className={`btn btn-sm float-right ${
-          completed ? 'btn-success' : 'btn-info'
-        }`}
         onClick={handleTodoUpdate}
+        className={`col-sm-2 btn btn-${completed ? 'success' : 'info'}`}
+        type="button"
       >
-        {completed ? <span>Completed</span> : <span>Not completed</span>}
+        {completed ? 'Done' : 'Pending'}
       </button>
-    </li>
+      <button
+        onClick={handleTodoDelete}
+        className="col-sm-2 btn btn-danger"
+        type="button"
+      >
+        Remove
+      </button>
+    </div>
   );
 }
 
