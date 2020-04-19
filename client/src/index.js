@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+
 import * as serviceWorker from './serviceWorker';
+import Todos from './Todos/Todos';
+import { store } from './store';
+import './index.css';
 
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "@apollo/react-hooks";
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
-});
-
-ReactDOM.render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Todos />
+  </Provider>,
+  document.getElementById('root')
+);
 
 serviceWorker.unregister();

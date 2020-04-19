@@ -20,9 +20,9 @@ const typeDefs = gql`
     todos: [Todo]!
   }
   type Mutation {
-    createTodo(text: String!):String
-    removeTodo(id: String!):String
-    updateTodo(id: String!):String
+    createTodo(text: String!): Todo
+    removeTodo(id: String!): String
+    updateTodo(id: String!): String
   }
 `;
 
@@ -32,12 +32,13 @@ const resolvers = {
   },
   Mutation: {
     createTodo: (parent, args, context, info) => {
-
-      return todos.push({
+      const newTodo = {
         id: Date.now().toString(),
         text: args.text,
         completed: false,
-      });
+      };
+      todos.push(newTodo);
+      return newTodo;
     },
     removeTodo: (parent, args, context, info) => {
       for (let i in todos) {
@@ -54,8 +55,8 @@ const resolvers = {
         }
       }
       return args.id;
-    }
-  }
+    },
+  },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
